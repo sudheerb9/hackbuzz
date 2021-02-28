@@ -7,7 +7,7 @@ const conn = mysql.createPool({
   host: "localhost",
   user: "wissenaire_sudheer",
   password: "sudheer@wissenaire",
-  database: "wissenaire_wiss21"
+  database: "wissenaire_wissenaire21"
 });
 
 const caconn = mysql.createPool({
