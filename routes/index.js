@@ -32,34 +32,36 @@ router.get('/', function(req, res, next) {
 });
 
 router.post('/submit', ensureNotFilled, function(req,res,next) {
-  var hackbuzzid; 
+  let hackbuzzid; 
   if(req.body.refca){
     const qr = ("INSERT INTO hackbuzz (name, email, phone, year, college, state, ref) VALUES ('"+req.body.fullname+"', '"+req.body.email+"', '"+req.body.phone+"', '"+req.body.year+"', '"+req.body.college+"', '"+req.body.state+"', '"+req.body.refca+"') ;");
     conn.query(qr, (err, result)=>{
       if(err) throw err;
       console.log(result);
       const id = ("SELECT id FROM `hackbuzz` WHERE email = '"+ req.body.email+"'");
-      conn.query(id, (err, result)=>{
+      conn.query(id, (err, rows)=>{
+        if (err) throw err; 
         if (rows[0].id < 10) hackbuzzid = 'W21HB000' + rows[0].id;
         else if (rows[0].id < 100) hackbuzzid = 'W21HB00' + rows[0].id;
         else if(rows[0].id < 1000) hackbuzzid = 'W21HB0' + rows[0].id;
         else hackbuzzid = 'W21HB' + rows[0].id;
-      })
-      const part = ("SELECT points from users WHERE wissid = '"+req.body.refca+"' ;");
-      caconn.query(part, (err,data) =>{
-        if(err) throw err;
-        if(data) {
-          console.log(data[0].points);
-          var points = data[0].points + 10;
-          const update = ("UPDATE `users` SET points = '"+points+"' WHERE wissid = '"+req.body.refca+"';");
-          caconn.query(update, (err,result)=>{
-            if (err) throw err;
-            console.log(result);
-          })
-        }
-        else {
-          console.log('no ca found')
-        }
+      
+        const part = ("SELECT points from users WHERE wissid = '"+req.body.refca+"' ;");
+        caconn.query(part, (err,data) =>{
+          if(err) throw err;
+          if(data) {
+            console.log(data[0].points);
+            var points = data[0].points + 10;
+            const update = ("UPDATE `users` SET points = '"+points+"' WHERE wissid = '"+req.body.refca+"';");
+            caconn.query(update, (err,result)=>{
+              if (err) throw err;
+              console.log(result);
+            })
+          }
+          else {
+            console.log('no ca found')
+          }
+        })
       })
     })
   }
@@ -68,7 +70,8 @@ router.post('/submit', ensureNotFilled, function(req,res,next) {
     conn.query(qr, (err, rows)=>{
       if(err) throw err;
       const id = ("SELECT id FROM `hackbuzz` WHERE email = '"+ req.body.email+"'");
-      conn.query(id, (err, result)=>{
+      conn.query(id, (err, rows)=>{
+        if(err) throw err;
         if (rows[0].id < 10) hackbuzzid = 'W21HB000' + rows[0].id;
         else if (rows[0].id < 100) hackbuzzid = 'W21HB00' + rows[0].id;
         else if(rows[0].id < 1000) hackbuzzid = 'W21HB0' + rows[0].id;
