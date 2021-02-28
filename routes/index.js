@@ -82,7 +82,7 @@ router.post('/submit', ensureNotFilled, function(req,res,next) {
     console.log(response.statusCode) ;
   });
 
-  res.send('You have successfully registered for 1st round of hackbuzz. Your hackbuzz id is "'+hackbuzzid+'"');
+  res.send('Successfully registered ');
 
 })
 
