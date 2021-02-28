@@ -16,7 +16,7 @@
     <script defer src="./js/fontawesome/all.min.js"></script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
-    
+
     <link rel="shortcut icon" href="./images/logo-mini.png" type="image/x-icon">
 
 </head>
@@ -208,7 +208,7 @@
                 </div>
             </div>
            
-            <form id="registerForm" method="POST" style="width: 100%;">
+            <form style="width: 100%;">
                 <div class="row">
                     <div class="form-group column large-6">
                         <label>Full Name</label>
@@ -248,10 +248,10 @@
                     
                 </div>
                 
-                <button type="submit" class="btn btn-dark">Submit</button>
+                <button type="submit" id="submit" class="btn btn-dark">Submit</button>
               </form>
               <script>
-                  $("#registerForm").submit(function(e) {
+                  $("form").submit(function(e) {
                     e.preventDefault(); 
                     var form = $(this);
                     $.ajax({
