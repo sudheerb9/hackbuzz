@@ -80,9 +80,9 @@ router.post('/submit', ensureNotFilled, function(req,res,next) {
   request.get("https://fundraiser.wissenaire.org/hackbuzzmail.php?name='"+req.body.fullname+"'&phone='"+req.body.phone+"'&hackbuzzid='"+hackbuzzid+"'")
   .on('response', function(response) {
     console.log(response.statusCode) ;
-  });
-
-  res.send('Successfully registered ');
+  }).then(function(){
+    res.send('Successfully registered ');
+  })
 
 })
 
