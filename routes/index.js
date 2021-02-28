@@ -27,7 +27,7 @@ function ensureNotFilled (req, res, next){
 }
 
 function ensureAdmin (req,res,next){
-  if(req.session.username == 'ca') next();
+  if(req.session.username == 'hackbuzz') next();
   else res.redirect('/adminlogin');
 }
 /* GET home page. */
@@ -106,7 +106,7 @@ router.get('/adminlogin', function(req,res,next){
 })
 
 router.post('/admin', function(req,res,next){
-  if(req.body.username == 'hackbuzz' && req.body.password == 'okstatus200') req.session.username = 'ca';
+  if(req.body.username == 'hackbuzz' && req.body.password == 'okstatus200') req.session.username = 'hackbuzz';
   res.redirect('/admin');
 })
 
@@ -114,7 +114,7 @@ router.get('/admin', ensureAdmin, function(req,res,next){
   const userData = ("SELECT * FROM `hackbuzz`;");
   conn.query(userData, (err, rows)=>{
     if(err) throw err;
-    res.render('admin', {participants: rows});
+    res.render('admin', {participant: rows});
   })
 })
 
