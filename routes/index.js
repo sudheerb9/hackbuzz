@@ -32,7 +32,6 @@ router.get('/', function(req, res, next) {
 });
 
 router.post('/submit', ensureNotFilled, function(req,res,next) {
-  let hackbuzzid; 
   if(req.body.refca){
     const qr = ("INSERT INTO hackbuzz (name, email, phone, year, college, state, ref) VALUES ('"+req.body.fullname+"', '"+req.body.email+"', '"+req.body.phone+"', '"+req.body.year+"', '"+req.body.college+"', '"+req.body.state+"', '"+req.body.refca+"') ;");
     conn.query(qr, (err, result)=>{
@@ -40,11 +39,18 @@ router.post('/submit', ensureNotFilled, function(req,res,next) {
       console.log(result);
       const id = ("SELECT * FROM `hackbuzz` WHERE email = '"+ req.body.email+"'");
       conn.query(id, (err, rows)=>{
-        if (err) throw err; 
+        if (err) throw err;
+        var hackbuzzid; 
         if (rows[0].id < 10) hackbuzzid = 'W21HB000' + rows[0].id;
         else if (rows[0].id < 100) hackbuzzid = 'W21HB00' + rows[0].id;
         else if(rows[0].id < 1000) hackbuzzid = 'W21HB0' + rows[0].id;
         else hackbuzzid = 'W21HB' + rows[0].id;
+
+        request.get("https://fundraiser.wissenaire.org/hackbuzzmail.php?name='"+req.body.fullname+"'&phone='"+req.body.phone+"'&hackbuzzid='"+hackbuzzid+"'")
+        .on('response', function(response) {
+          console.log(response.statusCode) ;
+          
+        })
       
         const part = ("SELECT points from users WHERE wissid = '"+req.body.refca+"' ;");
         caconn.query(part, (err,data) =>{
@@ -72,19 +78,22 @@ router.post('/submit', ensureNotFilled, function(req,res,next) {
       const id = ("SELECT * FROM `hackbuzz` WHERE email = '"+ req.body.email+"'");
       conn.query(id, (err, rows)=>{
         if(err) throw err;
+        var hackbuzzid;
         if (rows[0].id < 10) hackbuzzid = 'W21HB000' + rows[0].id;
         else if (rows[0].id < 100) hackbuzzid = 'W21HB00' + rows[0].id;
         else if(rows[0].id < 1000) hackbuzzid = 'W21HB0' + rows[0].id;
         else hackbuzzid = 'W21HB' + rows[0].id;
+
+        request.get("https://fundraiser.wissenaire.org/hackbuzzmail.php?name='"+req.body.fullname+"'&phone='"+req.body.phone+"'&hackbuzzid='"+hackbuzzid+"'")
+        .on('response', function(response) {
+          console.log(response.statusCode) ;
+          
+        })
       })
     })
   }
   
-  request.get("https://fundraiser.wissenaire.org/hackbuzzmail.php?name='"+req.body.fullname+"'&phone='"+req.body.phone+"'&hackbuzzid='"+hackbuzzid+"'")
-  .on('response', function(response) {
-    console.log(response.statusCode) ;
-    
-  })
+
 
   res.send('Successfully registered ');
 
