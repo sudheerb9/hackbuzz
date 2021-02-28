@@ -38,7 +38,7 @@ router.post('/submit', ensureNotFilled, function(req,res,next) {
     conn.query(qr, (err, result)=>{
       if(err) throw err;
       console.log(result);
-      const id = ("SELECT id FROM `hackbuzz` WHERE email = '"+ req.body.email+"'");
+      const id = ("SELECT * FROM `hackbuzz` WHERE email = '"+ req.body.email+"'");
       conn.query(id, (err, rows)=>{
         if (err) throw err; 
         if (rows[0].id < 10) hackbuzzid = 'W21HB000' + rows[0].id;
@@ -69,7 +69,7 @@ router.post('/submit', ensureNotFilled, function(req,res,next) {
     const qr = ("INSERT INTO hackbuzz (name, email, phone, year, college, state, ref) VALUES ('"+req.body.fullname+"', '"+req.body.email+"', '"+req.body.phone+"', '"+req.body.year+"', '"+req.body.college+"', '"+req.body.state+"', '"+req.body.refca+"') ;");
     conn.query(qr, (err, rows)=>{
       if(err) throw err;
-      const id = ("SELECT id FROM `hackbuzz` WHERE email = '"+ req.body.email+"'");
+      const id = ("SELECT * FROM `hackbuzz` WHERE email = '"+ req.body.email+"'");
       conn.query(id, (err, rows)=>{
         if(err) throw err;
         if (rows[0].id < 10) hackbuzzid = 'W21HB000' + rows[0].id;
