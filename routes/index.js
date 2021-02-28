@@ -32,7 +32,7 @@ router.get('/', function(req, res, next) {
 });
 
 router.post('/submit', ensureNotFilled, function(req,res,next) {
-  var hackbuzzid; 
+  let hackbuzzid; 
   if(req.body.refca){
     const qr = ("INSERT INTO hackbuzz (name, email, phone, year, college, state, ref) VALUES ('"+req.body.fullname+"', '"+req.body.email+"', '"+req.body.phone+"', '"+req.body.year+"', '"+req.body.college+"', '"+req.body.state+"', '"+req.body.refca+"') ;");
     conn.query(qr, (err, result)=>{
