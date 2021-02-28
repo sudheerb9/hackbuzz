@@ -261,15 +261,15 @@
                         {
                             if(result === 'Already registered using this email'){
                                 new swal({
-                                    
-                                    text: 'Already registered using this email',
+                                    title: 'Error',
+                                    text: result,
                                     icon: 'error'
                                 });
                             }
                             else{
                                 new swal({
                                     title: 'Success',
-                                    text: 'Sucessfully registered',
+                                    text: result,
                                     icon: 'success'
                                 });
                             }

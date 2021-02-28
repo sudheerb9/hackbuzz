@@ -2302,7 +2302,7 @@ input[type="button"] {
     letter-spacing: .5em;
     height: var(--btn-height);
     line-height: calc(var(--btn-height) - .4rem);
-    padding: 0 3.2rem;
+    padding: 0 3.2rem !important;
     margin: 0 0.4rem var(--vspace-0_5) 0;
     color: var(--color-btn-text);
     text-decoration: none;
