@@ -50,7 +50,7 @@ router.post('/submit', ensureNotFilled, function(req,res,next) {
         else if(rows[0].id < 1000) hackbuzzid = 'W21HB0' + rows[0].id;
         else hackbuzzid = 'W21HB' + rows[0].id;
 
-        request.get("https://fundraiser.wissenaire.org/hackbuzzmail.php?name='"+req.body.fullname+"'&phone='"+req.body.phone+"'&hackbuzzid='"+hackbuzzid+"'")
+        request.get("https://fundraiser.wissenaire.org/hackbuzzmail.php?name="+req.body.fullname+"&phone="+req.body.phone+"&hackbuzzid="+hackbuzzid+"&email="+req.body.email+"")
         .on('response', function(response) {
           console.log(response.statusCode) ;
           
@@ -88,7 +88,7 @@ router.post('/submit', ensureNotFilled, function(req,res,next) {
         else if(rows[0].id < 1000) hackbuzzid = 'W21HB0' + rows[0].id;
         else hackbuzzid = 'W21HB' + rows[0].id;
 
-        request.get("https://fundraiser.wissenaire.org/hackbuzzmail.php?name='"+req.body.fullname+"'&phone='"+req.body.phone+"'&hackbuzzid='"+hackbuzzid+"'")
+        request.get("https://fundraiser.wissenaire.org/hackbuzzmail.php?name="+req.body.fullname+"&phone="+req.body.phone+"&hackbuzzid="+hackbuzzid+"&email="+req.body.email+"")
         .on('response', function(response) {
           console.log(response.statusCode) ;
           
