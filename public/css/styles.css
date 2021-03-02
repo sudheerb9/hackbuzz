@@ -4891,7 +4891,7 @@ html.no-csstransitions .s-hero__content {
 
 /* Track */
 ::-webkit-scrollbar-track {
-  background: transparent; 
+  background: #000; 
 }
  
 /* Handle */
