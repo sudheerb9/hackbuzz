@@ -18,7 +18,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(session({ secret: 'keyboard cat', key: 'sid'}));
 app.use(express.static(__dirname + '/public'));
 
-app.use('/', httpsRedirect(true),indexRouter);
+app.use('/', httpsRedirect(true), indexRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
